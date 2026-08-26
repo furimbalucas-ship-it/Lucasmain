@@ -148,6 +148,8 @@
       win.classList.remove('opening');
       win.style.transform = '';
       win.style.opacity = '';
+      const data = openWindows.get(app);
+      if (data) data.animTimer = null;
     }, 450);
   }
 
@@ -205,7 +207,7 @@
 
     bindWindowEvents(win, app);
     windowsEl.appendChild(win);
-    openWindows.set(app, { el: win, bounds: { x, y, w, h } });
+    openWindows.set(app, { el: win, bounds: { x, y, w, h }, animTimer: null, closeTimer: null });
 
     animateWindowOpen(win, app, x, y);
     win.style.left = x + 'px';
@@ -266,6 +268,8 @@
       win.style.transform = '';
       win.style.opacity = '';
       win.style.pointerEvents = 'none';
+      const data = openWindows.get(app);
+      if (data) data.animTimer = null;
     }, 380);
 
     dockEl.querySelector(`[data-app="${app}"]`)?.classList.remove('active');
@@ -276,16 +280,24 @@
     if (!data) return;
     const win = data.el;
 
-    win.classList.add('closing');
+    if (win.classList.contains('closing')) return;
+
+    if (data.animTimer) clearTimeout(data.animTimer);
+
+    win.classList.remove('opening', 'minimizing', 'minimized', 'window-shake', 'dragging', 'maximized');
+    win.style.visibility = 'visible';
+    win.style.pointerEvents = 'none';
     win.style.transform = 'scale(0.85)';
     win.style.opacity = '0';
+    win.classList.add('closing');
 
-    setTimeout(() => {
+    data.closeTimer = setTimeout(() => {
       win.remove();
       openWindows.delete(app);
       dockEl.querySelector(`[data-app="${app}"]`)?.classList.remove('active');
       const remaining = [...openWindows.keys()];
       if (remaining.length) focusWindow(remaining[remaining.length - 1]);
+      else document.querySelector('.menu-app-name').textContent = 'Finder';
     }, 250);
   }
 
@@ -308,13 +320,33 @@
     }
   }
 
-  function bindWindowEvents(win, app) {
-    const titlebar = win.querySelector('.window-titlebar');
-    const [closeBtn, minBtn, maxBtn] = win.querySelectorAll('.tl');
+  function bindTrafficLight(btn, action) {
+    const handler = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      action();
+    };
+    btn.addEventListener('mousedown', handler);
+    btn.addEventListener('click', handler);
+    btn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      action();
+    }, { passive: false });
+  }
 
-    closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeApp(app); });
-    minBtn.addEventListener('click', (e) => { e.stopPropagation(); minimizeWindow(app); });
-    maxBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMaximize(win, app); });
+  function bindWindowEvents(win, app) {
+    win.dataset.app = app;
+    const titlebar = win.querySelector('.window-titlebar');
+    const closeBtn = win.querySelector('.tl-close');
+    const minBtn = win.querySelector('.tl-minimize');
+    const maxBtn = win.querySelector('.tl-maximize');
+
+    if (!closeBtn || !minBtn || !maxBtn) return;
+
+    bindTrafficLight(closeBtn, () => closeApp(app));
+    bindTrafficLight(minBtn, () => minimizeWindow(app));
+    bindTrafficLight(maxBtn, () => toggleMaximize(win, app));
 
     titlebar.addEventListener('dblclick', (e) => {
       if (e.target.closest('.tl')) return;
@@ -429,6 +461,14 @@
     const item = e.target.closest('.dock-item');
     if (!item) return;
     openApp(item.dataset.app);
+  });
+
+  dockEl.addEventListener('contextmenu', (e) => {
+    const item = e.target.closest('.dock-item');
+    if (!item) return;
+    e.preventDefault();
+    const app = item.dataset.app;
+    if (openWindows.has(app)) closeApp(app);
   });
 
   document.querySelectorAll('.desktop-icon').forEach(icon => {
