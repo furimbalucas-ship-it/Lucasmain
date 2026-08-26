@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": ".",
+  "framework": null,
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
