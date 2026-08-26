@@ -12,7 +12,15 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍎</text></svg>" />
 </head>
 <body>
-  <div class="desktop" id="desktop">
+  <!-- Boot Screen -->
+  <div class="boot-screen" id="bootScreen">
+    <div class="boot-logo" aria-hidden="true">&#63743;</div>
+    <div class="boot-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      <div class="boot-progress-bar" id="bootProgressBar"></div>
+    </div>
+  </div>
+
+  <div class="desktop hidden" id="desktop">
     <!-- Menu Bar -->
     <header class="menu-bar">
       <div class="menu-bar-left">
@@ -94,7 +102,25 @@
       </div>
     </footer>
 
-    <!-- Spotlight -->
+    <!-- Context Menu -->
+    <div class="context-menu hidden" id="contextMenu">
+      <button>Nova Pasta</button>
+      <button>Obter Informações</button>
+      <div class="context-divider"></div>
+      <button>Alterar Papel de Parede</button>
+      <button>Organizar por Nome</button>
+    </div>
+
+    <!-- Apple Menu -->
+    <div class="apple-menu hidden" id="appleMenu">
+      <button>Sobre este Mac</button>
+      <div class="context-divider"></div>
+      <button>Ajustes do Sistema…</button>
+      <button>App Store…</button>
+      <div class="context-divider"></div>
+      <button>Reiniciar…</button>
+      <button>Desligar…</button>
+    </div>
     <div class="spotlight-overlay hidden" id="spotlight">
       <div class="spotlight-box">
         <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4.5"/><path d="M9.5 9.5L13 13"/></svg>
