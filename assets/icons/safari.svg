@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="safari-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5ac8fa"/>
+      <stop offset="100%" stop-color="#007aff"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#safari-bg)"/>
+  <circle cx="64" cy="64" r="40" fill="#fff"/>
+  <circle cx="64" cy="64" r="36" fill="none" stroke="#e8e8ed" stroke-width="1"/>
+  <polygon points="64,32 72,64 64,96 56,64" fill="#ff3b30"/>
+  <polygon points="64,32 88,64 64,64" fill="#007aff" opacity="0.7"/>
+  <circle cx="64" cy="64" r="4" fill="#333"/>
+</svg>

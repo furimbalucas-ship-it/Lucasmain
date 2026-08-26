@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Experiência desktop macOS no navegador — Lucasmain" />
+  <title>Lucasmain — macOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍎</text></svg>" />
+</head>
+<body>
+  <div class="desktop" id="desktop">
+    <!-- Menu Bar -->
+    <header class="menu-bar">
+      <div class="menu-bar-left">
+        <button class="menu-apple" aria-label="Menu Apple">&#63743;</button>
+        <span class="menu-app-name">Finder</span>
+        <nav class="menu-items">
+          <span>Arquivo</span>
+          <span>Editar</span>
+          <span>Visualizar</span>
+          <span>Ir</span>
+          <span>Janela</span>
+          <span>Ajuda</span>
+        </nav>
+      </div>
+      <div class="menu-bar-right">
+        <span class="menu-icon" title="Wi-Fi">
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 3.5c2.2 0 4.2.9 5.7 2.3l1.1-1.1C13 2.8 10.6 1.7 8 1.7S3 2.8 1.2 4.7l1.1 1.1C3.8 4.4 5.8 3.5 8 3.5zm0 3c1.3 0 2.5.5 3.4 1.4l1.1-1.1C11.2 5.3 9.7 4.7 8 4.7S4.8 5.3 3.5 6.8l1.1 1.1c.9-.9 2.1-1.4 3.4-1.4zm0 3c.7 0 1.3.3 1.8.7l1.8-1.8C10.7 8.1 9.4 7.5 8 7.5S5.3 8.1 4.4 9.4l1.8 1.8c.5-.4 1.1-.7 1.8-.7zM8 12a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+        </span>
+        <span class="menu-icon" title="Bateria">
+          <svg width="22" height="12" viewBox="0 0 22 12" fill="currentColor"><rect x="0" y="2" width="18" height="8" rx="2" stroke="currentColor" fill="none" stroke-width="1.2"/><rect x="2" y="4" width="12" height="4" rx="1"/><rect x="19" y="4.5" width="2" height="3" rx="0.5"/></svg>
+        </span>
+        <span class="menu-icon" title="Buscar">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4.5"/><path d="M9.5 9.5L13 13"/></svg>
+        </span>
+        <span class="menu-icon" title="Control Center">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="1" width="5" height="5" rx="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2"/></svg>
+        </span>
+        <time class="menu-clock" id="menuClock"></time>
+      </div>
+    </header>
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <button class="desktop-icon" data-app="about">
+        <span class="icon-img icon-hd">💾</span>
+        <span class="icon-label">Macintosh HD</span>
+      </button>
+      <button class="desktop-icon" data-app="about">
+        <span class="icon-img">📁</span>
+        <span class="icon-label">Projetos</span>
+      </button>
+    </div>
+
+    <!-- Windows Container -->
+    <div class="windows" id="windows"></div>
+
+    <!-- Dock -->
+    <footer class="dock-container">
+      <div class="dock" id="dock">
+        <button class="dock-item active" data-app="finder" title="Finder">
+          <img src="/assets/icons/finder.svg" alt="Finder" />
+          <span class="dock-dot"></span>
+        </button>
+        <button class="dock-item" data-app="safari" title="Safari">
+          <img src="/assets/icons/safari.svg" alt="Safari" />
+        </button>
+        <button class="dock-item" data-app="messages" title="Mensagens">
+          <img src="/assets/icons/messages.svg" alt="Mensagens" />
+        </button>
+        <button class="dock-item" data-app="mail" title="Mail">
+          <img src="/assets/icons/mail.svg" alt="Mail" />
+        </button>
+        <button class="dock-item" data-app="photos" title="Fotos">
+          <img src="/assets/icons/photos.svg" alt="Fotos" />
+        </button>
+        <button class="dock-item" data-app="music" title="Música">
+          <img src="/assets/icons/music.svg" alt="Música" />
+        </button>
+        <button class="dock-item" data-app="settings" title="Ajustes">
+          <img src="/assets/icons/settings.svg" alt="Ajustes" />
+        </button>
+        <div class="dock-divider"></div>
+        <button class="dock-item" data-app="about" title="Sobre">
+          <img src="/assets/icons/about.svg" alt="Sobre" />
+        </button>
+        <button class="dock-item" data-app="trash" title="Lixeira">
+          <img src="/assets/icons/trash.svg" alt="Lixeira" />
+        </button>
+      </div>
+    </footer>
+
+    <!-- Spotlight -->
+    <div class="spotlight-overlay hidden" id="spotlight">
+      <div class="spotlight-box">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4.5"/><path d="M9.5 9.5L13 13"/></svg>
+        <input type="text" placeholder="Spotlight Search" id="spotlightInput" autocomplete="off" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Window Templates -->
+  <template id="tpl-finder">
+    <div class="window" data-app="finder">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <button class="tl tl-close" aria-label="Fechar"></button>
+          <button class="tl tl-minimize" aria-label="Minimizar"></button>
+          <button class="tl tl-maximize" aria-label="Maximizar"></button>
+        </div>
+        <span class="window-title">Finder</span>
+      </div>
+      <div class="window-body finder-body">
+        <aside class="finder-sidebar">
+          <div class="sidebar-section">
+            <h4>Favoritos</h4>
+            <ul>
+              <li class="active">🏠 Início</li>
+              <li>📄 Documentos</li>
+              <li>⬇️ Downloads</li>
+              <li>🖼️ Imagens</li>
+            </ul>
+          </div>
+          <div class="sidebar-section">
+            <h4>Locais</h4>
+            <ul>
+              <li>💾 Macintosh HD</li>
+              <li>☁️ iCloud Drive</li>
+            </ul>
+          </div>
+        </aside>
+        <main class="finder-main">
+          <div class="finder-toolbar">
+            <span>◀ ▶</span>
+            <span class="finder-path">Macintosh HD › Usuários › Lucas</span>
+          </div>
+          <div class="finder-grid">
+            <div class="finder-item"><span>📁</span><small>Aplicativos</small></div>
+            <div class="finder-item"><span>📁</span><small>Documentos</small></div>
+            <div class="finder-item"><span>📁</span><small>Downloads</small></div>
+            <div class="finder-item"><span>📁</span><small>Imagens</small></div>
+            <div class="finder-item"><span>📁</span><small>Música</small></div>
+            <div class="finder-item"><span>📁</span><small>Filmes</small></div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-safari">
+    <div class="window" data-app="safari">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <button class="tl tl-close"></button>
+          <button class="tl tl-minimize"></button>
+          <button class="tl tl-maximize"></button>
+        </div>
+        <span class="window-title">Safari</span>
+      </div>
+      <div class="window-body safari-body">
+        <div class="safari-toolbar">
+          <span>◀ ▶</span>
+          <div class="safari-url">lucasmain.vercel.app</div>
+          <span>↻</span>
+        </div>
+        <div class="safari-content">
+          <div class="safari-hero">
+            <h1>Bem-vindo ao Safari</h1>
+            <p>Navegue pela web com estilo macOS.</p>
+            <div class="safari-cards">
+              <a href="https://vercel.com" target="_blank" rel="noopener" class="safari-card">
+                <strong>Vercel</strong>
+                <small>Deploy instantâneo</small>
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener" class="safari-card">
+                <strong>GitHub</strong>
+                <small>Controle de versão</small>
+              </a>
+              <a href="https://developer.apple.com" target="_blank" rel="noopener" class="safari-card">
+                <strong>Apple Dev</strong>
+                <small>Documentação</small>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-about">
+    <div class="window window-about" data-app="about">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <button class="tl tl-close"></button>
+          <button class="tl tl-minimize"></button>
+          <button class="tl tl-maximize"></button>
+        </div>
+        <span class="window-title">Sobre este Mac</span>
+      </div>
+      <div class="window-body about-body">
+        <div class="about-logo">&#63743;</div>
+        <h2>macOS Sonoma</h2>
+        <p class="about-version">Versão 14.5</p>
+        <div class="about-specs">
+          <div><span>Chip</span><strong>Apple M3 Pro</strong></div>
+          <div><span>Memória</span><strong>18 GB</strong></div>
+          <div><span>Projeto</span><strong>Lucasmain</strong></div>
+          <div><span>Deploy</span><strong>Vercel</strong></div>
+        </div>
+        <button class="about-btn">Mais Informações…</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-settings">
+    <div class="window" data-app="settings">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <button class="tl tl-close"></button>
+          <button class="tl tl-minimize"></button>
+          <button class="tl tl-maximize"></button>
+        </div>
+        <span class="window-title">Ajustes do Sistema</span>
+      </div>
+      <div class="window-body settings-body">
+        <aside class="settings-sidebar">
+          <div class="settings-search">🔍 Buscar</div>
+          <ul>
+            <li class="active">👤 Conta Apple</li>
+            <li>📶 Wi-Fi</li>
+            <li>🔵 Bluetooth</li>
+            <li>🔔 Notificações</li>
+            <li>🎨 Aparência</li>
+            <li>🖥️ Área de Trabalho</li>
+            <li>🔒 Privacidade</li>
+          </ul>
+        </aside>
+        <main class="settings-main">
+          <h3>Conta Apple</h3>
+          <div class="settings-profile">
+            <div class="avatar">L</div>
+            <div>
+              <strong>Lucas</strong>
+              <small>lucas@icloud.com</small>
+            </div>
+          </div>
+          <div class="settings-row"><span>iCloud</span><span class="badge">Ativo</span></div>
+          <div class="settings-row"><span>Media & Compras</span><span>›</span></div>
+          <div class="settings-row"><span>Localização</span><span>›</span></div>
+        </main>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-generic">
+    <div class="window" data-app="">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <button class="tl tl-close"></button>
+          <button class="tl tl-minimize"></button>
+          <button class="tl tl-maximize"></button>
+        </div>
+        <span class="window-title"></span>
+      </div>
+      <div class="window-body generic-body">
+        <div class="generic-icon"></div>
+        <h3></h3>
+        <p>Em breve nesta versão.</p>
+      </div>
+    </div>
+  </template>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

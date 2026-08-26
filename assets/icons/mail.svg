@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="mail-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64d2ff"/>
+      <stop offset="100%" stop-color="#007aff"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#mail-bg)"/>
+  <rect x="20" y="36" width="88" height="56" rx="8" fill="#fff"/>
+  <path d="M20 44 L64 72 L108 44" fill="none" stroke="#007aff" stroke-width="4" stroke-linejoin="round"/>
+</svg>
