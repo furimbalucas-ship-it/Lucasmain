@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Itamaracá 3D — Explorador</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div id="cesiumContainer"></div>
+
+      <header id="hud-top">
+        <div class="brand">
+          <span class="brand-icon">🌴</span>
+          <div>
+            <h1>Itamaracá 3D</h1>
+            <p>Ilha de Itamaracá · Pernambuco, Brasil</p>
+          </div>
+        </div>
+        <div id="coords" class="coords">—</div>
+      </header>
+
+      <aside id="sidebar">
+        <section class="panel">
+          <h2>Pontos de interesse</h2>
+          <ul id="poi-list"></ul>
+        </section>
+        <section class="panel">
+          <h2>Camadas</h2>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-buildings" checked />
+            Edificações (OpenStreetMap)
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-terrain" checked />
+            Terreno real (elevação)
+          </label>
+          <label class="toggle" id="google-tiles-row">
+            <input type="checkbox" id="toggle-google-3d" />
+            Google 3D Photorealistic
+          </label>
+        </section>
+        <section class="panel controls-help">
+          <h2>Controles</h2>
+          <dl>
+            <dt>W A S D</dt>
+            <dd>Mover</dd>
+            <dt>Shift</dt>
+            <dd>Correr</dd>
+            <dt>Espaço / C</dt>
+            <dd>Subir / descer</dd>
+            <dt>Mouse</dt>
+            <dd>Olhar ao redor</dd>
+            <dt>Clique</dt>
+            <dd>Capturar cursor</dd>
+            <dt>Esc</dt>
+            <dd>Liberar cursor</dd>
+          </dl>
+        </section>
+      </aside>
+
+      <div id="loading">
+        <div class="spinner"></div>
+        <p>Carregando terreno e dados de Itamaracá…</p>
+      </div>
+
+      <div id="token-warning" class="hidden">
+        <div class="token-card">
+          <h2>Token Cesium Ion necessário</h2>
+          <p>
+            Para carregar terreno e imagens de satélite, crie uma conta gratuita em
+            <a href="https://cesium.com/ion/signup" target="_blank" rel="noreferrer">cesium.com/ion</a>
+            e configure <code>VITE_CESIUM_ION_TOKEN</code> no arquivo <code>.env</code>.
+          </p>
+          <button id="dismiss-token-warning">Continuar mesmo assim</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
