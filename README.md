@@ -52,3 +52,23 @@ Ative a **Map Tiles API** no Google Cloud Console. A cobertura em Itamaracá dep
 
 - [Vite](https://vitejs.dev/) + TypeScript
 - [CesiumJS](https://cesium.com/platform/cesiumjs/)
+
+## Deploy na Vercel
+
+### Opção 1 — Importar do GitHub (recomendado)
+
+1. Acesse [vercel.com/new](https://vercel.com/new) e importe o repositório
+2. Em **Environment Variables**, adicione:
+   - `VITE_CESIUM_ION_TOKEN` — token gratuito do [Cesium Ion](https://cesium.com/ion/tokens)
+   - `VITE_GOOGLE_MAPS_API_KEY` — *(opcional)* para Google 3D Photorealistic
+3. Clique em **Deploy**
+
+A Vercel detecta automaticamente o Vite via `vercel.json`.
+
+### Opção 2 — CLI
+
+```bash
+npm i -g vercel
+vercel login
+vercel --prod --build-env VITE_CESIUM_ION_TOKEN=seu_token
+```
