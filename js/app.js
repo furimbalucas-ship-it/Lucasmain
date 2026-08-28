@@ -6,6 +6,7 @@
     safari:   { title: 'Safari',   template: 'tpl-safari',   width: 680, height: 480, x: 120, y: 80  },
     about:    { title: 'Sobre este Mac', template: 'tpl-about', width: 380, height: 420, center: true },
     settings: { title: 'Ajustes do Sistema', template: 'tpl-settings', width: 680, height: 460, x: 160, y: 100 },
+    processlab: { title: 'Process Lab', template: 'tpl-processlab', width: 640, height: 480, x: 100, y: 70 },
     messages: { title: 'Mensagens', icon: '💬', width: 420, height: 340, x: 200, y: 120 },
     mail:     { title: 'Mail',      icon: '✉️', width: 520, height: 400, x: 140, y: 90 },
     photos:   { title: 'Fotos',     icon: '🖼️', width: 600, height: 440, x: 100, y: 70 },
@@ -292,6 +293,7 @@
     win.classList.add('closing');
 
     data.closeTimer = setTimeout(() => {
+      win.querySelector('.processlab-body')?._processLabCleanup?.();
       win.remove();
       openWindows.delete(app);
       dockEl.querySelector(`[data-app="${app}"]`)?.classList.remove('active');
@@ -413,6 +415,10 @@
         li.classList.add('active');
       });
     });
+
+    if (app === 'processlab' && typeof renderProcessLab === 'function') {
+      renderProcessLab(win.querySelector('.processlab-body'));
+    }
   }
 
   function onPointerMove(clientX, clientY) {
@@ -593,6 +599,7 @@
       else if (q.includes('mail') || q.includes('email')) openApp('mail');
       else if (q.includes('foto')) openApp('photos');
       else if (q.includes('music') || q.includes('música')) openApp('music');
+      else if (q.includes('process') || q.includes('lab') || q.includes('spawn')) openApp('processlab');
       else openApp('finder');
     }
   });
