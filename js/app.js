@@ -62,10 +62,7 @@
       desktop.classList.remove('hidden');
       desktop.classList.add('desktop-reveal');
       bootComplete = true;
-      setTimeout(() => {
-        openApp('finder', true);
-        setTimeout(() => openApp('processlab', true), 500);
-      }, 300);
+      setTimeout(() => openApp('finder', true), 300);
     }, 600);
   }
 
