@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Experiência desktop macOS no navegador — Lucasmain" />
   <title>Lucasmain — macOS</title>
+  <base href="/main/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -91,6 +92,9 @@
         </button>
         <button class="dock-item" data-app="settings" title="Ajustes">
           <img src="/assets/icons/settings.svg" alt="Ajustes" />
+        </button>
+        <button class="dock-item" data-app="processlab" title="Process Lab">
+          <span class="dock-emoji" aria-hidden="true">⚙️</span>
         </button>
         <div class="dock-divider"></div>
         <button class="dock-item" data-app="about" title="Sobre">
@@ -282,6 +286,30 @@
     </div>
   </template>
 
+  <template id="tpl-processlab">
+    <div class="window window-processlab" data-app="processlab">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <button class="tl tl-close"></button>
+          <button class="tl tl-minimize"></button>
+          <button class="tl tl-maximize"></button>
+        </div>
+        <span class="window-title">Process Lab</span>
+      </div>
+      <div class="window-body processlab-body">
+        <header class="processlab-header">
+          <div>
+            <h3>Spawn de processos — client-side</h3>
+            <p>JavaScript no navegador do visitante tenta virar processos do motor (renderer, SW, popup, iframe).</p>
+          </div>
+          <button type="button" class="process-run-btn">Executar novamente</button>
+        </header>
+        <div class="process-status">Aguardando…</div>
+        <div class="process-log" role="log" aria-live="polite"></div>
+      </div>
+    </div>
+  </template>
+
   <template id="tpl-generic">
     <div class="window" data-app="">
       <div class="window-titlebar">
@@ -300,6 +328,7 @@
     </div>
   </template>
 
+  <script src="/js/process-lab.js"></script>
   <script src="/js/app.js"></script>
 </body>
 </html>
